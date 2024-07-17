@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="trikona logo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRIKONA AI</title>
@@ -11,31 +12,62 @@
             margin: 0;
             padding: 0;
         }
+        .logo {
+            width: 50px; /* adjust the width to your liking */
+            height: 50px; /* adjust the height to your liking */
+            margin: 10px; /* add some margin around the logo */
+        }
+        .header {
+            background-image: url("trikona logo.png");
+            background-size: 50px 50px; /* adjust the size to your liking */
+            background-repeat: no-repeat;
+            padding-left: 60px; /* add some padding to make room for the logo */
+        }
         body {
-            background-image: url("artbreeder-image-2024-01-24T16_14_41.228Z.png");
+            background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/11027.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
             color: white;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-  animation: gradientAnimation 10s ease infinite alternate;
+            animation: gradientAnimation 10s ease infinite alternate;
+            
         }
+        body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://4kwallpapers.com/images/walls/thumbs_3t/11027.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(8px); /* Blur effect */
+    z-index: -1; /* Ensure the background stays behind other content */
+}
         video {
             display: none;
+            position: relative;
+            margin: 0px;
         }
         .controlContainer {
             display: flex;
             gap: 20px;
-            background-color: rgba(57, 210, 192, 0.5);
+            background-color: rgba(76, 14, 190, 0.232);
             border: 2px solid black;
             padding: 20px;
             border-radius: 10px;
             align-items: center;
             justify-content: center;
             margin-top: 20px;
+            transition: transform 0.3s ease;
         }
+        .controlContainer:hover {
+            transform: scale(1.05);
+        }
+        
         .input-group {
             display: flex;
             flex-direction: column;
@@ -51,97 +83,139 @@
             font-weight: 900;
             border-radius: 10px;
             border: 2px solid black;
-            background-color: rgb(57, 210, 192);
+            background-color: rgba(191, 209, 30, 0.448);
         }
         h1, h2 {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 0px;
+            margin-bottom: 0px;
         }
         canvas {
             border: 2px solid black;
-            margin-top: 20px;
+            margin-top: 7px;
         }
         .values-display {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 0;
             font-size: 1.2rem;
-                  }
-                  .video-canvas-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        .controlContainer {
+            position: absolute;
+            top: 250px; /* position 20px from the top of the video canvas */
+            left: 125px; /* position 20px from the left of the video canvas */
+        }
 
-.video-canvas-container video,.video-canvas-container canvas {
-    margin: 10px;
-}
-
-.values-display-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.values-display {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+        .values-display {
+            position: absolute;
+            top: 50%; /* position at the middle of the video canvas */
+            right: 20px; /* position 20px from the right of the video canvas */
+            transform: translateY(-50%); /* adjust the vertical position */
+            margin-right: 125px; /* add some margin to the right */
+        }
+        .glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
     border-radius: 10px;
-    margin: 10px;
-    font-size: 1.2rem;
-}
-        
-        
-        body, html {
-  /* Existing styles */
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  animation: gradientAnimation 10s ease infinite alternate;
 }
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-.controlContainer {
-  /* Existing styles */
-  transition: transform 0.3s ease;
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
 }
 
-.controlContainer:hover {
-  transform: scale(1.05);
+.glow-on-hover:active {
+    color: #000
 }
 
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
     </style>
 </head>
 <body>
     <h1>Trikona AI</h1>
+    <img src="trikona logo.png" alt="TRIKONA AI Logo" class="logo">
     <h2>Deepanshu Jha</h2>
     
-    <video src=""></video>
+    <video class="rounded-corners"></video>
     <canvas></canvas>
 
-    <div class="controlContainer">
-        <div class="input-group">
-            <label for="horizontalDistance" class="lab">Horizontal Distance</label>
-            <input class="label" type="number" id="horizontalDistance" value="0" placeholder="0">
+    <div class="container" style="display: flex; align-items: center; gap: 20px; margin-top: 20px;">
+        <div class="controlContainer">
+            <div class="input-group">
+                <label for="horizontalDistance" class="lab">Horizontal Distance</label>
+                <input class="label" type="number" id="horizontalDistance" value="0" placeholder="0">
+            </div>
+        </div>
+        <div class="values-display" id="valuesDisplay">
+            <p>Angle: <span id="angle"></span></p>
+            <p>Radians: <span id="rad"></span></p>
+            <p>Cosine: <span id="cos"></span></p>
+            <p>Sine: <span id="sin"></span></p>
+            <p>Tangent: <span id="tan"></span></p>
+            <p>Height: <span id="height"></span></p>
         </div>
     </div>
-
-    <div class="values-display" id="valuesDisplay">
-        <p>Angle: <span id="angle"></span></p>
-        <p>Radians: <span id="rad"></span></p>
-        <p>Cosine: <span id="cos"></span></p>
-        <p>Sine: <span id="sin"></span></p>
-        <p>Tangent: <span id="tan"></span></p>
-    </div>
-
+    
+    <button id="takePictureButton" class="glow-on-hover">Take Picture</button> <!-- Add this line -->
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
     <script src="./main.js"></script>
