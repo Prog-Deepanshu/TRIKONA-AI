@@ -19,8 +19,33 @@ class AngleFinder {
         this.registerEvents();
         requestAnimationFrame(this.render.bind(this));
 
-        document.getElementById("takePictureButton").addEventListener("click", this.takePicture.bind(this)); // Add this line
+        document.getElementById("takePictureButton").addEventListener("click", this.takePicture.bind(this));
+        document.getElementById("resetButton").addEventListener("click", this.reset.bind(this)); // Add reset event
     }
+
+    // Existing methods (initializeVideoStream, registerEvents, handleCanvasClick, etc.)
+
+    // Reset method
+    reset() {
+        // Clear points and reset values
+        this.point1 = null;
+        this.point2 = null;
+        this.values = {
+            angle: 0,
+            rad: 0,
+            sin: 0,
+            cos: 0,
+            tan: 0,
+            height: 0,
+        };
+
+        // Clear canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        // Reset the display
+        this.updateValuesDisplay();
+    }
+
 
     initializeVideoStream() {
         navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
@@ -79,6 +104,7 @@ class AngleFinder {
         document.getElementById('tan').innerText = this.values.tan.toFixed(2);
         document.getElementById('height').innerText = this.values.height.toFixed(2);
     }
+    
 
     render() {
         this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
